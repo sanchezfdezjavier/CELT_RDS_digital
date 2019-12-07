@@ -2,7 +2,7 @@
 --
 -- refresco
 --
--- Circuito que refresca los displays peri�dicamente
+-- Circuito que refresca los displays periódicamente
 --
 ----------------------------------------------------------------------------------
 library IEEE;
@@ -25,13 +25,13 @@ begin
 	process(CLK_1ms)
 		begin
 		if(CLK_1ms' event and CLK_1ms='1') then
-			SS <= SS + 1;
+			SS <= SS + 1;		-- Se incremente el valor de la señal de control del MUX, para activar los displays de forma consecutiva.
 		end if;
 	end process;
 	
-	S <= SS;
+	S <= SS;	-- Cableado de la señal de control del mux.
 			
-	AN <= "0111" when SS="00" else
+	AN <= 	"0111" when SS="00" else
 			"1011" when SS="01" else
 			"1101" when SS="10" else
 			"1110" when SS="11";

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------------------
 --
 -- Decodificador de ASCII a 7 segmentos 
--- Departamento de Ingeniería Electrónica (2019)
+-- Departamento de IngenierÃ­a ElectrÃ³nica (2019)
 --
 ----------------------------------------------------------------------------------
 
@@ -11,7 +11,7 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity decodASCIIa7s is
-    Port ( CODIGO    : in  STD_LOGIC_VECTOR (7 downto 0);   -- Entrada del código ASCII
+    Port ( CODIGO    : in  STD_LOGIC_VECTOR (7 downto 0);   -- Entrada del cÃ³digo ASCII
            SEGMENTOS : out  STD_LOGIC_VECTOR (0 to 6));     -- Salidas al display (abcdefg)
 end decodASCIIa7s;
 

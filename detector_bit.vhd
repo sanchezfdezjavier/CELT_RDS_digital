@@ -11,7 +11,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity detector_bit is
     Port ( CLK_1ms : in  STD_LOGIC;    -- reloj
-           LIN     : in  STD_LOGIC;    -- L韓ea de datos
+           LIN     : in  STD_LOGIC;    -- L铆nea de datos
            BITS   : out  STD_LOGIC);   -- Bits detectados
 end detector_bit;
 
@@ -21,29 +21,28 @@ constant UMBRAL0 : STD_LOGIC_VECTOR (7 downto 0) := "00000101"; --  5 umbral par
 constant UMBRAL1 : STD_LOGIC_VECTOR (7 downto 0) := "00101101"; -- 45 umbral para el 1
 
 
-signal reg_desp : STD_LOGIC_VECTOR (49 downto 0):=(others=>'0');
-signal energia  : STD_LOGIC_VECTOR (7 downto 0) :="00000000";
-signal s_bits   : STD_LOGIC:='0';
+signal reg_desp : STD_LOGIC_VECTOR (49 downto 0):=(others=>'0');  -- Declaraci贸n e inicializaci贸n  a ceros del contenido del registro.
+signal energia  : STD_LOGIC_VECTOR (7 downto 0) :="00000000";     -- Declaraci贸n e inicializaci贸n de la variable que almacena el valor de la energ铆a contenida en el registro.
+signal s_bits   : STD_LOGIC:='0';                                 -- Se帽al auxiliar de salida.
 
 begin
 
-  process (CLK_1ms)
+  process (CLK_1ms) -- Proceso sensible a la se帽al de reloj.
     begin
-      if (CLK_1ms'event and CLK_1ms='1') then
-         energia <= energia + LIN - reg_desp(49);
-			reg_desp(49 downto 1) <= reg_desp(48 downto 0);
-			reg_desp(0) <= LIN;
-			if (energia > UMBRAL1) then
-				s_bits <= '1';
-			end if;
-			if(energia < UMBRAL0) then
-				s_bits <='0';
-			end if;
- 
-      end if;
-    end process;
+      if (CLK_1ms'event and CLK_1ms='1') then -- El c贸digo dentro del 'if' se ejecutar谩 cada flanco de subida.
+        energia <= energia + LIN - reg_desp(49);  -- Actualizaci贸n del valor de energ铆a. Sumamos el valor entrante y eliminamos el saliente.
+			  reg_desp(49 downto 1) <= reg_desp(48 downto 0); -- Desplazamos un bit a la izquierada, eliminado el bit 50 y dejando un 'espacio' en el bit de entrada.
+			  reg_desp(0) <= LIN;                             -- Asiganmos el valor entrante al primer bit del registro(posici贸n 0).
+			  if (energia > UMBRAL1) then -- Si la energ铆a es mayor que el umbral definido, se activar谩 la se帽al que indica la presencia de un '1'.
+				  s_bits <= '1';
+			  end if;
+			  if(energia < UMBRAL0) then  -- Si la energ铆a es menor, se considera que hay un '0'.
+				  s_bits <='0';
+			  end if;
+    end if;
+  end process;
 	 
-  BITS<=s_bits;   -- Asignaci髇 de la salida en funci髇 del estado (Moore)
+  BITS<=s_bits;   -- Asignaci贸n de la salida en funci贸n del estado (Moore)
   
 end a_detector_bit;
 

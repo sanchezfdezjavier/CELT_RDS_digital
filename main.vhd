@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
 --
--- M骴ulo principal, descripci髇 estructural: cableado.
+-- M贸dulo principal, descripci贸n estructural: cableado.
 --
 ----------------------------------------------------------------------------------
 
@@ -12,11 +12,11 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity main is
     Port ( CLK : in  STD_LOGIC;                      -- Entrada del reloj principal de 50 MHz
-           LIN : in  STD_LOGIC;                      -- Entrada de datos del circuito anal骻ico
+           LIN : in  STD_LOGIC;                      -- Entrada de datos del circuito anal贸gico
            SEG7 : out  STD_LOGIC_VECTOR (0 to 6);    -- Salidas para los segmentos del display
 			  CONTROL1: out STD_LOGIC;						  -- BORRAR
            CONTROL2: out STD_LOGIC;	
-			  AN : out  STD_LOGIC_VECTOR (3 downto 0)); -- Salidas de activaci髇 de los displays 
+			  AN : out  STD_LOGIC_VECTOR (3 downto 0)); -- Salidas de activaci贸n de los displays 
 end main;
 
 architecture a_main of main is
@@ -32,7 +32,7 @@ end component;
 component aut_captura
     Port ( CLK_1ms : in  STD_LOGIC;  -- Reloj del sistema
            BITS : in  STD_LOGIC;     -- Bits de entrada
-           CAP : out  STD_LOGIC);    -- Se馻l para el registro de captura
+           CAP : out  STD_LOGIC);    -- Se帽al para el registro de captura
 end component;
 
 component aut_control
@@ -43,8 +43,8 @@ component aut_control
 end component;
 
 component detector_bit
-    Port ( CLK_1ms : in  STD_LOGIC;    -- reloj
-           LIN     : in  STD_LOGIC;    -- L韓ea de datos
+    Port ( CLK_1ms : in  STD_LOGIC;    -- Reloj
+           LIN     : in  STD_LOGIC;    -- L铆nea de datos
            BITS   : out  STD_LOGIC);   -- Bits detectados
 end component;
 
@@ -57,14 +57,14 @@ end component;
 
 component visualizacion
     
-  Port ( E0   : in  STD_LOGIC_VECTOR (7 downto 0);   -- Entrada siguiente car醕ter
-         EN   : in  STD_LOGIC;                       -- Activaci髇 para desplazamiento
+  Port ( E0   : in  STD_LOGIC_VECTOR (7 downto 0);   -- Entrada siguiente car谩cter
+         EN   : in  STD_LOGIC;                       -- Activaci贸n para desplazamiento
          CLK_1ms  : in  STD_LOGIC;                   -- Entrada de reloj de refresco       
          SEG7 : out  STD_LOGIC_VECTOR (0 to 6);      -- Salida para los displays 
-         AN   : out  STD_LOGIC_VECTOR (3 downto 0)); -- Activaci髇 individual
+         AN   : out  STD_LOGIC_VECTOR (3 downto 0)); -- Activaci贸n individual
 end component;
 
--- SE袮LES AUXILIARES PARA INTERCONEXIONES
+-- SE脩ALES AUXILIARES PARA INTERCONEXIONES
 
 signal dec_bits_out: STD_LOGIC;
 signal aut_cap_out: STD_LOGIC;
@@ -75,7 +75,7 @@ signal div_rej_out: STD_LOGIC;
 
 begin
 
--- INTERCONEXI覰 DE M覦ULOS
+-- INTERCONEXI脫N DE M脫DULOS
 ---------------------------
 
 U1 : div_reloj     port map(CLK, div_rej_out);
@@ -93,7 +93,5 @@ U5: aut_control port map(div_rej_out, reg_desp9_out, aut_con_out);
 
 U6: visualizacion port map(reg_desp9_out(7 downto 0), aut_con_out, div_rej_out, SEG7, AN);
 
-CONTROL1 <= dec_bits_out;
-CONTROL2 <= aut_con_out;
 end a_main;
 

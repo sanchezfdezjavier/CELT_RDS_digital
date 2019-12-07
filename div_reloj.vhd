@@ -17,7 +17,7 @@ end div_reloj;
 architecture a_div_reloj of div_reloj is
 
 signal contador : STD_LOGIC_VECTOR (15 downto 0):=(others=>'0'); --contador
-signal frec_div: STD_LOGIC:='0';              -- señal de frecuencia dividida
+signal frec_div: STD_LOGIC:='0';              -- seÃ±al de frecuencia dividida
 
 begin
 
@@ -33,7 +33,7 @@ process(CLK)
   
   end process;
   
-CLK_1ms<=frec_div;                         -- frec_div está cableada con la salida
+CLK_1ms<=frec_div;                         -- frec_div estÃ¡ cableada con la salida
 
 end a_div_reloj;
 

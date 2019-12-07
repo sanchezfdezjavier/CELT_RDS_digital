@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
 -- 
--- M骴ulo de visualizaci髇, descripci髇 estructural: cableado.
+-- M贸dulo de visualizaci贸n, descripci贸n estructural: cableado.
 --
 ----------------------------------------------------------------------------------
 
@@ -11,17 +11,17 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity visualizacion is
     
-  Port ( E0   : in  STD_LOGIC_VECTOR (7 downto 0);   -- Entrada siguiente car醕ter
-         EN   : in  STD_LOGIC;                       -- Activaci髇 para desplazamiento
+  Port ( E0   : in  STD_LOGIC_VECTOR (7 downto 0);   -- Entrada siguiente car谩cter
+         EN   : in  STD_LOGIC;                       -- Activaci贸n para desplazamiento
          CLK_1ms  : in  STD_LOGIC;                   -- Entrada de reloj de refresco       
          SEG7 : out  STD_LOGIC_VECTOR (0 to 6);      -- Salida para los displays 
-         AN   : out  STD_LOGIC_VECTOR (3 downto 0)); -- Activaci髇 individual
+         AN   : out  STD_LOGIC_VECTOR (3 downto 0)); -- Activaci贸n individual
 end visualizacion;
 
 
 architecture a_visualizacion of visualizacion is
 
---SE袮LES NECESARIAS PARA LAS INTERCONEXIONES
+--SE锟紸LES NECESARIAS PARA LAS INTERCONEXIONES
 	signal ref_a_mux: STD_LOGIC_VECTOR(1 downto 0);
 	signal mux_a_deco: STD_LOGIC_VECTOR(7 downto 0);
 	signal reg_a_mux0: STD_LOGIC_VECTOR(7 downto 0);
@@ -39,13 +39,13 @@ component MUX4x8
            E1 : in  STD_LOGIC_VECTOR (7 downto 0); -- Entrada de datos 1
            E2 : in  STD_LOGIC_VECTOR (7 downto 0); -- Entrada de datos 2
            E3 : in  STD_LOGIC_VECTOR (7 downto 0); -- Entrada de datos 3
-           S : in  STD_LOGIC_VECTOR (1 downto 0);  -- Se馻l de control
+           S : in  STD_LOGIC_VECTOR (1 downto 0);  -- Se帽al de control
            Y : out  STD_LOGIC_VECTOR (7 downto 0)); -- Salida
 end component;
 
 --DECODIFICADOR
 component decodASCIIa7s
-	Port ( CODIGO    : in  STD_LOGIC_VECTOR (7 downto 0);   -- Entrada del c骴igo ASCII
+	Port ( CODIGO    : in  STD_LOGIC_VECTOR (7 downto 0);   -- Entrada del c贸digo ASCII
            SEGMENTOS : out  STD_LOGIC_VECTOR (0 to 6));     -- Salidas al display (abcdefg)
 end component;
 
@@ -73,7 +73,7 @@ end component;
 
 begin
 
-	--INTERCONEXI覰 DE M覦ULOS
+	--INTERCONEXI脫N DE M脫DULOS
 	--------------------------
 
 	U1: MUX4x8	port map(reg_a_mux0,
@@ -90,14 +90,6 @@ begin
 									reg_a_mux2,
 									reg_a_mux1,
 									reg_a_mux0);
-									
---	U2: rdesp_disp port map(CLK_1ms,
---									EN,
---									E0,
---									reg_a_mux0,
---									reg_a_mux1,
---									reg_a_mux2,
---									reg_a_mux3);
 
 	U3: refresco port map(CLK_1ms, ref_a_mux, AN);
 

@@ -17,7 +17,7 @@ entity MUX4x8 is
            E1 : in  STD_LOGIC_VECTOR (7 downto 0);  -- Entrada de datos 1
            E2 : in  STD_LOGIC_VECTOR (7 downto 0);  -- Entrada de datos 2
            E3 : in  STD_LOGIC_VECTOR (7 downto 0);  -- Entrada de datos 3
-           S : in  STD_LOGIC_VECTOR (1 downto 0);   -- Señal de control
+           S : in  STD_LOGIC_VECTOR (1 downto 0);   -- SeÃ±al de control
            Y : out  STD_LOGIC_VECTOR (7 downto 0)); -- Salida
 end MUX4x8;
 
