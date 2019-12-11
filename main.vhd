@@ -14,9 +14,7 @@ entity main is
     Port ( CLK : in  STD_LOGIC;                      -- Entrada del reloj principal de 50 MHz
            LIN : in  STD_LOGIC;                      -- Entrada de datos del circuito analógico
            SEG7 : out  STD_LOGIC_VECTOR (0 to 6);    -- Salidas para los segmentos del display
-			  CONTROL1: out STD_LOGIC;						  -- BORRAR
-           CONTROL2: out STD_LOGIC;	
-			  AN : out  STD_LOGIC_VECTOR (3 downto 0)); -- Salidas de activación de los displays 
+	    AN : out  STD_LOGIC_VECTOR (3 downto 0)); -- Salidas de activación de los displays 
 end main;
 
 architecture a_main of main is

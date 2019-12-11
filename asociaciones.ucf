@@ -23,8 +23,4 @@ NET "AN<2>" LOC = "M13"; # Activación del display 2 = AN2
 NET "AN<3>" LOC = "K14"; # Activación del display 3 = AN3
 
 # Entrada externa donde se conecta la Señal entrante
-
 NET "LIN" LOC="B2";
-NET "CONTROL1" LOC="A9"; #hemos usado este pin para debuggear
-NET "CONTROL2" LOC="B9";
-# Rellene los valores adecuados de las patillas de entrada o salida
