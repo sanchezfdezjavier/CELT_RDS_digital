@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
 -- 
--- Registro de desplazamiento para la visualizaci�n. 
+-- Registro de desplazamiento para la visualización. 
 --
 ----------------------------------------------------------------------------------
 

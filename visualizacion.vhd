@@ -21,7 +21,7 @@ end visualizacion;
 
 architecture a_visualizacion of visualizacion is
 
---SE�ALES NECESARIAS PARA LAS INTERCONEXIONES
+--SEÑALES NECESARIAS PARA LAS INTERCONEXIONES
 	signal ref_a_mux: STD_LOGIC_VECTOR(1 downto 0);
 	signal mux_a_deco: STD_LOGIC_VECTOR(7 downto 0);
 	signal reg_a_mux0: STD_LOGIC_VECTOR(7 downto 0);
