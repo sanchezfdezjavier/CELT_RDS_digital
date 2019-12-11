@@ -13,6 +13,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 entity main is
     Port ( CLK : in  STD_LOGIC;                      -- Entrada del reloj principal de 50 MHz
            LIN : in  STD_LOGIC;                      -- Entrada de datos del circuito analógico
+           RESET : in STD_LOGIC;
            SEG7 : out  STD_LOGIC_VECTOR (0 to 6);    -- Salidas para los segmentos del display
 	    AN : out  STD_LOGIC_VECTOR (3 downto 0)); -- Salidas de activación de los displays 
 end main;
@@ -28,14 +29,16 @@ component div_reloj
 end component;
 
 component aut_captura
-    Port ( CLK_1ms : in  STD_LOGIC;  -- Reloj del sistema
-           BITS : in  STD_LOGIC;     -- Bits de entrada
-           CAP : out  STD_LOGIC);    -- Señal para el registro de captura
+    Port ( CLK_1ms : in  STD_LOGIC;  -- Reloj del sistema.
+           BITS : in  STD_LOGIC;     -- Bits de entrada.
+           RESET : in STD_LOGIC;     -- Reset manual.
+           CAP : out  STD_LOGIC);    -- Señal para el registro de captura.
 end component;
 
 component aut_control
     Port ( CLK_1ms : in  STD_LOGIC;                     -- Reloj del sistema
            ASCII : in  STD_LOGIC_VECTOR (8 downto 0);   -- Datos de entrada del registro
+           RESET : in STD_LOGIC;				-- Reset manual
            VALID_DISP : out  STD_LOGIC);                -- Salida para validar el display
 	
 end component;
@@ -80,14 +83,11 @@ U1 : div_reloj     port map(CLK, div_rej_out);
 
 U2: detector_bit port map(div_rej_out, LIN, dec_bits_out);
 
-U3: aut_captura port map(div_rej_out, dec_bits_out, aut_cap_out);
+U3: aut_captura port map(div_rej_out, dec_bits_out, RESET, aut_cap_out);
 
-U4: reg_desp_9b port map(div_rej_out, 
-								dec_bits_out, 
-								aut_cap_out, 
-								reg_desp9_out);
+U4: reg_desp_9b port map(div_rej_out, dec_bits_out, aut_cap_out, reg_desp9_out);
 								
-U5: aut_control port map(div_rej_out, reg_desp9_out, aut_con_out);
+U5: aut_control port map(div_rej_out, reg_desp9_out, RESET, aut_con_out);
 
 U6: visualizacion port map(reg_desp9_out(7 downto 0), aut_con_out, div_rej_out, SEG7, AN);
 
