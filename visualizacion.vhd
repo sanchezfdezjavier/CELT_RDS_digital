@@ -14,7 +14,7 @@ entity visualizacion is
   Port ( E0   : in  STD_LOGIC_VECTOR (7 downto 0);   -- Entrada siguiente carácter
          EN   : in  STD_LOGIC;                       -- Activación para desplazamiento
          CLK_1ms  : in  STD_LOGIC;                   -- Entrada de reloj de refresco       
-         SEG7 : out  STD_LOGIC_VECTOR (0 to 6);      -- Salida para los displays 
+         SEG7 : out  STD_LOGIC_VECTOR (0 to 7);      -- Salida para los displays 
          AN   : out  STD_LOGIC_VECTOR (3 downto 0)); -- Activación individual
 end visualizacion;
 
@@ -46,7 +46,7 @@ end component;
 --DECODIFICADOR
 component decodASCIIa7s
 	Port ( CODIGO    : in  STD_LOGIC_VECTOR (7 downto 0);   -- Entrada del código ASCII
-           SEGMENTOS : out  STD_LOGIC_VECTOR (0 to 6));     -- Salidas al display (abcdefg)
+           SEGMENTOS : out  STD_LOGIC_VECTOR (0 to 7));     -- Salidas al display (abcdefg)
 end component;
 
 --REFRESCO
