@@ -13,10 +13,8 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 entity main is
     Port ( CLK : in  STD_LOGIC;                      -- Entrada del reloj principal de 50 MHz
            LIN : in  STD_LOGIC;                      -- Entrada de datos del circuito analógico
-           SEG7 : out  STD_LOGIC_VECTOR (0 to 6);    -- Salidas para los segmentos del display
-			  CONTROL1: out STD_LOGIC;						  -- BORRAR
-           CONTROL2: out STD_LOGIC;	
-			  AN : out  STD_LOGIC_VECTOR (3 downto 0)); -- Salidas de activación de los displays 
+           SEG7 : out  STD_LOGIC_VECTOR (0 to 7);    -- Salidas para los segmentos del display
+	    AN : out  STD_LOGIC_VECTOR (3 downto 0)); -- Salidas de activación de los displays 
 end main;
 
 architecture a_main of main is
@@ -60,7 +58,7 @@ component visualizacion
   Port ( E0   : in  STD_LOGIC_VECTOR (7 downto 0);   -- Entrada siguiente carácter
          EN   : in  STD_LOGIC;                       -- Activación para desplazamiento
          CLK_1ms  : in  STD_LOGIC;                   -- Entrada de reloj de refresco       
-         SEG7 : out  STD_LOGIC_VECTOR (0 to 6);      -- Salida para los displays 
+         SEG7 : out  STD_LOGIC_VECTOR (0 to 7);      -- Salida para los displays 
          AN   : out  STD_LOGIC_VECTOR (3 downto 0)); -- Activación individual
 end component;
 

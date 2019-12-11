@@ -14,6 +14,7 @@ NET "SEG7<3>" LOC = "N11"; # Señal = CD
 NET "SEG7<4>" LOC = "P12"; # Señal = CE
 NET "SEG7<5>" LOC = "L13"; # Señal = CF
 NET "SEG7<6>" LOC = "M12"; # Señal = CG
+NET "SEG7<7>" LOC = "N13"; # Señal = DP 
 
 # Señales de activación de los displays
 
