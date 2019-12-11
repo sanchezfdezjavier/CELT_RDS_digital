@@ -27,7 +27,7 @@ begin-- Devolvemos al autómata al estado inicial
     begin
       
       if(RESET = '1') then
-        count <= "00000000";
+        cont <= "00000000";
         ST <= ESP0;
       elsif (CLK_1ms'event and CLK_1ms='1') then   -- Condición cada flanco de subida del reloj
         case ST is
