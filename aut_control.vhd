@@ -10,7 +10,8 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity aut_control is
     Port ( CLK_1ms : in  STD_LOGIC;                     -- Reloj del sistema
-           ASCII : in  STD_LOGIC_VECTOR (8 downto 0);   -- Datos de entrada del registro
+		   ASCII : in  STD_LOGIC_VECTOR (8 downto 0);   -- Datos de entrada del registro
+		   RESET : in STD_LOGIC;						-- Reset manual
            VALID_DISP : out  STD_LOGIC);                -- Salida para validar el display
 	
 end aut_control;
@@ -24,9 +25,12 @@ signal ST : STATE_TYPE:=ESP_SYNC;					-- Declaración e inicializaciónd el esta
 signal cont : STD_LOGIC_VECTOR (15 downto 0):="0000000000000000"; -- Declaración e inicialización del contador.
 
 begin
-  process (CLK_1ms) -- Proceso sensible al reloj de 1 ms.
-    begin
-      if (CLK_1ms'event and CLK_1ms='1') then	-- El código dentro del 'if' se ejecutará cada flanco de subida.
+  process (CLK_1ms, RESET) -- Proceso sensible al reloj de 1 ms y al RESET.
+	begin
+	  if (RESET = '1') then
+		cont <= "0000000000000000";
+		ST <= ESP_SYNC;
+      elsif (CLK_1ms'event and CLK_1ms='1') then	-- El código dentro del 'if' se ejecutará cada flanco de subida.
         case ST is
 		  
           when ESP_SYNC =>		

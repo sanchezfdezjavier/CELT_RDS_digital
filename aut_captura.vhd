@@ -11,6 +11,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 entity aut_captura is
     Port ( CLK_1ms : in  STD_LOGIC;  -- Reloj del sistema.
            BITS : in  STD_LOGIC;     -- Bits de entrada.
+           RESET : in STD_LOGIC;     -- Reset manual.
            CAP : out  STD_LOGIC);    -- Señal para el registro de captura.
 end aut_captura;
 
@@ -21,22 +22,24 @@ signal ST : STATE_TYPE := ESP0;                     -- Definición e inicializac
 signal s_CAP : STD_LOGIC := '0';                    -- Definición e inicialización de la señal que activa la captura de bits.
 signal cont : STD_LOGIC_VECTOR (7 downto 0):="00000000";  -- Definición e inicialización del contador.
 
-
-
-begin
-  process (CLK_1ms)                           -- Proceso sensible a la señal de reloj
+begin-- Devolvemos al autómata al estado inicial
+  process (CLK_1ms, RESET)      -- Proceso sensible a la señal de reloj y al RESET
     begin
-      if CLK_1ms'event and CLK_1ms='1' then   -- Condición cada flanco de subida del reloj
+      
+      if(RESET = '1') then
+        cont <= "00000000";
+        ST <= ESP0;
+      elsif (CLK_1ms'event and CLK_1ms='1') then   -- Condición cada flanco de subida del reloj
         case ST is
 
-          when ESP0 =>      -- Estado inicial. Espera por un '0' y pasa al siguiente estado.
+          when ESP0 =>      -- Estado inicial. Espera por un '0' y pasa al siguiente estado
             if BITS='1' then
               ST<=ESP0;
             else
               ST<=ESP1;
             end if;
 
-          when ESP1 =>      --  Cuando llegue un flanco de subida(un '1' después de un '0'), pasa al siguiente estado.
+          when ESP1 =>      --  Cuando llegue un flanco de subida(un '1' después de un '0'), pasa al siguiente estado
             if BITS='0' then
               ST<= ESP1;
             else
