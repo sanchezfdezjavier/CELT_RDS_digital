@@ -24,3 +24,6 @@ NET "AN<3>" LOC = "K14"; # Activación del display 3 = AN3
 
 # Entrada externa donde se conecta la Señal entrante
 NET "LIN" LOC="B2";
+
+# RESET manual en el primer pulsador de la izquierda.
+NET "RESET" LOC = "G12";
